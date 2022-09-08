@@ -1,20 +1,23 @@
+import { Todo } from "@prisma/client";
 import { inject, injectable } from "tsyringe";
 import { ITodosRepository } from "../../repositories/ITodosRepository";
 
-type CreateTodo = {
+interface CreateTodoParams {
   name: string;
 
   completed?: true;
-};
+}
+
+type CreateTodoResponse = Promise<Todo>;
 
 @injectable()
 export class CreateTodoUseCase {
   constructor(
     @inject("TodosRepository")
-    private todosRepository: ITodosRepository
+    private readonly todosRepository: ITodosRepository
   ) {}
 
-  async execute({ name, completed }: CreateTodo) {
+  async execute({ name, completed }: CreateTodoParams): CreateTodoResponse {
     const todo = await this.todosRepository.create({
       name,
       completedAt: completed ? new Date() : undefined,

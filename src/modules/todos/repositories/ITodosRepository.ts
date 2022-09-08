@@ -7,5 +7,5 @@ export interface ICreateTodoRepository {
 }
 
 export interface ITodosRepository {
-  create({ name, completedAt }: ICreateTodoRepository): Promise<Todo>;
+  create: ({ name, completedAt }: ICreateTodoRepository) => Promise<Todo>;
 }

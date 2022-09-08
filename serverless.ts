@@ -36,6 +36,22 @@ const serverlessConfiguration: AWS = {
       host: "127.0.0.1",
     },
   },
+  resources: {
+    Resources: {
+      todosDatabase: {
+        Type: "AWS::RDS::DBInstance",
+        Properties: {
+          MasterUsername: "ogrilo",
+          MasterUserPassword: "serenata",
+          DBInstanceClass: "db.t2.micro",
+          Engine: "postgres",
+          EngineVersion: "12",
+          AllocatedStorage: "5",
+          DBName: "todos",
+        },
+      },
+    },
+  },
 };
 
 module.exports = serverlessConfiguration;

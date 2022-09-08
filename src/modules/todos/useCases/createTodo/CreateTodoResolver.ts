@@ -5,7 +5,7 @@ import { CreateTodoUseCase } from "./CreateTodoUseCase";
 export class CreateTodoResolver {
   constructor(
     @inject(CreateTodoUseCase)
-    private createTodoUseCase: CreateTodoUseCase
+    private readonly createTodoUseCase: CreateTodoUseCase
   ) {}
 
   async mutation(data: any) {

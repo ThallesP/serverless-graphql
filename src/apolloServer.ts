@@ -10,8 +10,8 @@ const apolloServer = new ApolloServer({
   typeDefs: schema,
   resolvers: {
     Mutation: {
-      createTodo: (data) => {
-        return container.resolve(CreateTodoResolver).mutation(data);
+      createTodo: async (data) => {
+        return await container.resolve(CreateTodoResolver).mutation(data);
       },
     },
   },
