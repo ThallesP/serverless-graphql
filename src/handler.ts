@@ -1,7 +1,7 @@
-import { handlerPath } from "@libs/handler-resolver";
+import { handlerPath } from "./infra/lambda/handler-resolver";
 
 export default {
-  handler: `${handlerPath(__dirname)}/apolloServer.handler`,
+  handler: `${handlerPath(__dirname)}/infra/graphql/apolloServer.handler`,
   events: [
     {
       http: {

@@ -1,11 +1,5 @@
-import { Todo } from "@prisma/client";
-
-export interface ICreateTodoRepository {
-  name: string;
-
-  completedAt?: Date;
-}
+import { Todo } from "../entities/Todo";
 
 export interface ITodosRepository {
-  create: ({ name, completedAt }: ICreateTodoRepository) => Promise<Todo>;
+  save(todo: Todo): Promise<Todo>;
 }

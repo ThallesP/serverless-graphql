@@ -1,11 +1,11 @@
-import { Todo } from "@prisma/client";
 import { inject, injectable } from "tsyringe";
+import { Todo } from "../../entities/Todo";
 import { ITodosRepository } from "../../repositories/ITodosRepository";
 
 interface CreateTodoParams {
   name: string;
 
-  completed?: true;
+  completedAt?: Date;
 }
 
 type CreateTodoResponse = Promise<Todo>;
@@ -17,11 +17,10 @@ export class CreateTodoUseCase {
     private readonly todosRepository: ITodosRepository
   ) {}
 
-  async execute({ name, completed }: CreateTodoParams): CreateTodoResponse {
-    const todo = await this.todosRepository.create({
-      name,
-      completedAt: completed ? new Date() : undefined,
-    });
+  async execute({ name, completedAt }: CreateTodoParams): CreateTodoResponse {
+    const todo = await this.todosRepository.save(
+      new Todo({ name, completedAt })
+    );
 
     return todo;
   }
