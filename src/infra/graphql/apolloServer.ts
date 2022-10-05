@@ -1,22 +1,20 @@
 import "reflect-metadata";
 import "../container";
 
+import { ListTodoQuery } from "./resolvers/queries/ListTodosQuery";
+import { container } from "tsyringe";
 import { ApolloServer } from "apollo-server-lambda";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
-import schema from "../../../schema";
-import { container } from "tsyringe";
 import { CreateTodoMutation } from "./resolvers/mutations/CreateTodoMutation";
+import { buildSchemaSync } from "type-graphql";
+
+const schema = buildSchemaSync({
+  resolvers: [ListTodoQuery, CreateTodoMutation],
+  container: { get: (cls) => container.resolve(cls) },
+});
 
 const apolloServer = new ApolloServer({
-  typeDefs: schema,
-  resolvers: {
-    Mutation: {
-      createTodo: async (_, { data }) => {
-        const createTodoMutation = container.resolve(CreateTodoMutation);
-        return await createTodoMutation.mutate(data);
-      },
-    },
-  },
+  schema,
   introspection: true,
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 });

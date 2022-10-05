@@ -1,6 +1,6 @@
-import { ITodosRepository } from "src/modules/todos/repositories/ITodosRepository";
-import { PrismaTodosRepository } from "src/modules/todos/repositories/prisma/PrismaTodosRepository";
 import { container } from "tsyringe";
+import type { ITodosRepository } from "../../modules/todos/repositories/ITodosRepository";
+import { PrismaTodosRepository } from "../../modules/todos/repositories/prisma/PrismaTodosRepository";
 
 container.registerSingleton<ITodosRepository>(
   "TodosRepository",

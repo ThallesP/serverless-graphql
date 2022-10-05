@@ -9,7 +9,7 @@ interface CreateTodoProps {
   updatedAt?: Date;
 }
 
-interface TodoAttributes {
+export interface TodoAttributes {
   id: string;
 
   name: string;
